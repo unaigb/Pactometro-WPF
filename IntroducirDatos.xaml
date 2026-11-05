@@ -1,0 +1,129 @@
+﻿<Window x:Class="El_Pactometro.IntroducirDatos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:El_Pactometro"
+        mc:Ignorable="d"
+        Title="Introducir elecciones" Height="850" Width="665" ResizeMode="NoResize" Icon="Media/Icono.png">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="Auto" />
+            <RowDefinition  Height="Auto" />
+            <RowDefinition />
+            <RowDefinition  Height="Auto" />
+            <RowDefinition  Height="Auto" />
+            <RowDefinition  Height="Auto" />
+            <RowDefinition />
+            <RowDefinition  Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="162.5"/>
+            <ColumnDefinition Width="162.5"/>
+            <ColumnDefinition Width="162.5"/>
+            <ColumnDefinition Width="162.5"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Tipo" HorizontalAlignment="Left" Margin="109,5,0,0" />
+        <ComboBox Name="Caja1" Margin="50,30,124,20" ToolTip="Selecciona el tipo de Elecciones" SelectionChanged="Caja1_SelectionChanged" Grid.ColumnSpan="2">
+            <ComboBoxItem Content="Elecciones Generales" />
+            <ComboBoxItem Content="Elecciones Autonómicas" />
+        </ComboBox>
+
+        <Label Content="Lugar" Grid.Column="1" HorizontalAlignment="Left" Margin="142,5,0,0" Grid.ColumnSpan="2"/>
+        <ComboBox Name="Caja2" Margin="88,30,88,20" Grid.Column="1" ToolTip="Introduce el lugar de las elecciones autonómicas." IsEnabled="False" Grid.ColumnSpan="2">
+            <ComboBoxItem Content="Andalucía" />
+            <ComboBoxItem Content="Aragón" />
+            <ComboBoxItem Content="Asturias" />
+            <ComboBoxItem Content="Islas Baleares" />
+            <ComboBoxItem Content="Canarias" />
+            <ComboBoxItem Content="Cantabria" />
+            <ComboBoxItem Content="Castilla-La Mancha" />
+            <ComboBoxItem Content="Castilla y León" />
+            <ComboBoxItem Content="Cataluña" />
+            <ComboBoxItem Content="Ceuta" />
+            <ComboBoxItem Content="Comunidad Valenciana" />
+            <ComboBoxItem Content="Extremadura" />
+            <ComboBoxItem Content="Galicia" />
+            <ComboBoxItem Content="La Rioja" />
+            <ComboBoxItem Content="Comunidad de Madrid" />
+            <ComboBoxItem Content="Melilla" />
+            <ComboBoxItem Content="Región de Murcia" />
+            <ComboBoxItem Content="Navarra" />
+            <ComboBoxItem Content="País Vasco" />
+        </ComboBox>
+
+        <Label Content="Fecha" Grid.Column="3" HorizontalAlignment="Left" Margin="18,5,0,0" />
+        <DatePicker Name="Caja3" Margin="125,30,50,20" Grid.Column="2" ToolTip="Permite elegir la fecha de las elecciones." Grid.ColumnSpan="2" />
+
+        <Button Name="Boton_Anadir" Content="Añadir" Margin="20" Grid.Column="0" Grid.Row="1" Click="Anadir_Click" />
+        <Button Name="Boton_AnadirPrecargados" Content="Pre-Cargados" Margin="20" Grid.Column="1" Grid.Row="1" Click="PreCargar_Click"/>
+        <Button Name="Boton_Modificar" Content="Modificar" ToolTip="También puedes modificar un valor pulsando ENTER en las casillas de valores" Margin="20" Grid.Row="1" Grid.Column="2" Click="Modificar_Click" IsEnabled="False" />
+        <Button Name="Boton_Eliminar" Content="Eliminar" Margin="20" Grid.Column="3" Grid.Row="1" Click="Eliminar_Click" />
+
+        <ListView Name="tablaElecciones" Margin="20" Grid.Row="2" Grid.ColumnSpan="4" SelectionChanged="lista_SelectionChanged" MouseDown="lista_MouseDown" ItemsSource="{Binding Partidos}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Elección" DisplayMemberBinding="{Binding Tipo}" Width="150" />
+                        <GridViewColumn Header="Lugar" DisplayMemberBinding="{Binding Lugar}" Width="130" />
+                        <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Fecha, StringFormat={}{0:dd/MM/yyyy}}" Width="105" />
+                        <GridViewColumn Header="Escaños" DisplayMemberBinding="{Binding Escanios}" Width="75" />
+                        <GridViewColumn Header="Mayoría Absoluta" DisplayMemberBinding="{Binding MayAbsoluta}" Width="120" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Name="Boton_Subir" Margin="20" Grid.Column="1" Grid.Row="3" Click="Subir_Click" Height="50" Visibility="Hidden" BorderBrush="{x:Null}" ToolTip="Permite cambiar la selección hacia arriba.">
+            <Button.Background>
+                <ImageBrush ImageSource="Media/ArrowUp.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Name="Boton_Bajar" Margin="20" Grid.Row="3" Grid.Column="2" Click="Bajar_Click" Height="50" Visibility="Hidden" BorderBrush="{x:Null}" ToolTip="Permite cambiar la selección hacia abajo.">
+            <Button.Background>
+                <ImageBrush ImageSource="Media/ArrowDown.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+
+        <Label Content="Partido" HorizontalAlignment="Left" Margin="139,3,0,3" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <TextBox Name="Caja5" Margin="101,30,101,20" Grid.Row="4" ToolTip="Nombre del partido." Grid.ColumnSpan="2" />
+
+        <Label Content="Escaños" HorizontalAlignment="Left" Margin="136,3,0,2" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Name="Caja6" Margin="102,30,102,20" Grid.Row="4" Grid.Column="1" ToolTip="Número de escaños conseguidos." Grid.ColumnSpan="2" />
+
+        <Label Content="Color" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="3" Margin="46,26,0,15"/>
+        <xctk:ColorPicker x:Name="colorPicker" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="119,20,122,10"/>
+
+        <Button Name="Boton_Anadir2" Content="Añadir" Margin="101,20,101,20" Grid.Column="0" Grid.Row="5" Click="Anadir_Click" Grid.ColumnSpan="2" />
+        <Button Name="Boton_Modificar2" Content="Modificar" Margin="100,20,102,20" Grid.Row="5" Grid.Column="1" Click="Modificar_Click" IsEnabled="False" Grid.ColumnSpan="2" />
+        <Button Name="Boton_Eliminar2" Content="Eliminar" Margin="100,20,102,20" Grid.Column="2" Grid.Row="5" Click="Eliminar_Click" Grid.ColumnSpan="2" />
+
+        <ListView Name="tablaPartidos" Margin="20" Grid.Row="6" Grid.ColumnSpan="5" SelectionChanged="lista_SelectionChanged" MouseDown="lista_MouseDown">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Partido" DisplayMemberBinding="{Binding Nombre}" Width="130" />
+                        <GridViewColumn Header="Escaños" DisplayMemberBinding="{Binding Escanios}" Width="130" />
+                        <GridViewColumn Header="Color" Width="130">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="80" Height="10">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="{Binding Color}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="Cerrar" Content="Cerrar" Click="Cerrar_Click"  Grid.Row="7" Grid.Column="2" Margin="21,20,20,20" />
+        <Button x:Name="Guardar" Content="Guardar" Click="GuardarDatos_Click"  Grid.Row="7" Grid.Column="1" Margin="21,20,20,20" />
+    </Grid>
+</Window>

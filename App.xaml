@@ -1,0 +1,9 @@
+﻿<Application x:Class="El_Pactometro.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:El_Pactometro"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="Baloo">./Fuente/Baloo-Regular.ttf#Baloo</FontFamily>
+    </Application.Resources>
+</Application>
