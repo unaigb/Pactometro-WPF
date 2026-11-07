@@ -114,7 +114,7 @@ Pactometro-WPF/
 ## 📝 Notas
 
 - Los iconos de `Media/` son recursos gráficos de terceros usados con fines académicos. La tipografía *Baloo* se distribuye bajo licencia SIL Open Font.
-- La memoria del trabajo no se incluye en el repositorio.
+- La [memoria del trabajo](docs/Memoria-WPF.pdf) está incluida, con los datos personales tapados.
 
 ---
 
